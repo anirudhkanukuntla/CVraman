@@ -1,0 +1,50 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+.navbar_myfavorites_normal{
+	up-skin:Embed(source='com/Images/whiteImage.png');
+	down-skin:Embed(source='com/Images/whiteImage.png');
+	skin:Embed(source='com/Images/whiteImage.png');
+	over-skin:Embed(source='com/Images/whiteImage.png');
+	color: #298A08;
+	rollOverColor: #298A08;
+	fontSize:13;
+	fontStyle:normal;
+	fontWeight:bold;
+	corner-radius:5
+}
+.popUpBack{
+	backgroundColor:red;
+	backgroundAlpha:0.6;
+}
+.errorTip {
+	color: #FFFFFF;
+	fontSize: 9;
+	fontWeight: "bold";
+	shadowColor: #000000;
+	borderColor: #CE2929;
+	borderStyle: "errorTipRight";
+	paddingBottom: 4;
+	paddingLeft: 4;
+	paddingRight: 4;
+	paddingTop: 4;
+}
+.roundButton{
+	up-skin:Embed(source='com/Images/dot.jpg');
+	down-skin:Embed(source='com/Images/dot.jpg');
+	skin:Embed(source='com/Images/dot.jpg');
+	over-skin:Embed(source='com/Images/dot.jpg');
+	disabledSkin:Embed(source='com/Images/icon_red_dot.png');
+}
+.selectedStyle {
+	up-skin:Embed(source='com/Images/dot.jpg');
+	down-skin:Embed(source='com/Images/dot.jpg');
+	skin:Embed(source='com/Images/dot.jpg');
+	over-skin:Embed(source='com/Images/dot.jpg');
+} 
+.unselectedStyle { 
+	up-skin:Embed(source='com/Images/icon_red_dot.png');
+	down-skin:Embed(source='com/Images/icon_red_dot.png');
+	skin:Embed(source='com/Images/icon_red_dot.png');
+	over-skin:Embed(source='com/Images/icon_red_dot.png');
+}

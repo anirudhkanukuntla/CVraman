@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<department>
+<name>Department of English</name>
+<lectures>
+<name>SK. Shoukath ali</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.A</Qualification>
+<Exp>6 Years</Exp>
+</lectures>
+<lectures>
+<name>A. Chandra Sekhar</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.A</Qualification>
+<Exp>3 Years</Exp>
+</lectures>
+<lectures>
+<name>Purshotham</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.A</Qualification>
+<Exp>3 Years</Exp>
+</lectures>
+</department>

@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" creationComplete="group1_creationCompleteHandler(event)" xmlns:components="com.components.*">
+	<fx:Script>
+		<![CDATA[
+			import com.Controllers.XML_LOADER;
+			import com.Controllers.appControls;
+			import com.Controllers.effectsAll;
+			import com.Controllers.shaperwithColor;
+			import com.Controllers.sharpShape;
+			import com.models.mainEvent;
+			
+			import mx.collections.XMLListCollection;
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.effects.Effect;
+			import mx.events.FlexEvent;
+			import mx.utils.ObjectUtil;
+			private var myError:String="jhfgajdhfgdhmbn,mdnv   ";
+			private var _appControls:appControls = appControls.getInstance();
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				_appControls.buttDispatcher.addEventListener(mainEvent.MAIN_EVENT_DISP, eventTrac);
+				_appControls._xmlLoader = new XML_LOADER();
+				var str:String="";
+				var dateNow:Date = new Date();
+				str =  "?uniqueID="+dateNow.minutes+dateNow.seconds+dateNow.milliseconds;
+				_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath.mainNavigation+str,"MAIN_CONFIG");
+				var mainFlex12:sharpShape = new sharpShape;
+				mainFlex.rawChildren.addChild(mainFlex12);
+				
+				
+				var mainFlex123:shaperwithColor = new shaperwithColor;
+				mainFlex1.rawChildren.addChild(mainFlex123);
+				//mainFlex1
+				// Apply the errorTip class selector.
+			}
+			[Bindable]
+			private var lbl:Label = new Label;
+			private var eeffects:effectsAll = new effectsAll;
+			private function eventTrac(e:mainEvent):void
+			{
+				switch (e.eventType)
+				{
+					case "IMAGE_MOVE":
+						lbl.text = e.obj.label;
+						lbl.y = -6;
+						eeffects.animateMove(spaceSetter.width+e.obj.x+(120-textable.width)/2+8,spaceSetter.y+e.obj.y,500,textable);
+						eeffects.animateMove(spaceSetter.width+e.obj.x+8,spaceSetter.y+20+e.obj.y,500,mainFlex);
+						if(lbl.text==Departments.label){
+							mainFlex.addEventListener(MouseEvent.ROLL_OVER,Departments_rollOverHandler);
+						}else{
+							mainFlex.removeEventListener(MouseEvent.ROLL_OVER,Departments_rollOverHandler);
+						}
+						if(lbl.text==Courses.label){
+							mainFlex.addEventListener(MouseEvent.ROLL_OVER,Courses_rollOverHandler);
+						}else{
+							mainFlex.removeEventListener(MouseEvent.ROLL_OVER,Courses_rollOverHandler);
+						}
+						eeffects.animateMove(spaceSetter.width+e.obj.x+8,spaceSetter.y+20+e.obj.y,500,mainFlex1);
+						break;
+					case "DESP_EFECT_END":
+						if(textColorId == HOME.id){
+								HOME.setStyle("color",'#FF0000');
+							}else{
+								HOME.setStyle("color",'#000000');
+							}
+						if(textColorId == Departments.id){
+							Departments.setStyle("color",'#FF0000');
+						}else{
+							Departments.setStyle("color",'#000000');
+						}
+						if(textColorId == Courses.id){
+							Courses.setStyle("color",'#FF0000');
+						}else{
+							Courses.setStyle("color",'#000000');
+						}
+						if(textColorId == Infrastructure.id){
+							Infrastructure.setStyle("color",'#FF0000');
+						}else{
+							Infrastructure.setStyle("color",'#000000');
+						}
+						if(textColorId == Contact.id){
+							Contact.setStyle("color",'#FF0000');
+						}else{
+							Contact.setStyle("color",'#000000');
+						}
+						if(textColorId == about.id){
+							about.setStyle("color",'#000000');
+						}else{
+							about.setStyle("color",'#000000');
+						}
+						break;
+					case "MAIN_CONFIG":
+//						Alert.show(""+ObjectUtil.toString(e.obj));
+						var mainCol:XML = e.obj as XML;
+						var mainlist:XMLList =  mainCol.MainNavigation;
+						var index:uint = 0;
+						for each( var x:XML in mainlist){
+						var str:String = x.Mainlabel;
+						var str2:String ="Departments";
+						var str3:String ="Infrastructure";
+						switch(index){
+							case 0:
+								about.label = x.Mainlabel;
+								break;
+							case 1:
+								Departments.label = x.Mainlabel;
+								break;
+							case 2:
+								Courses.label = x.Mainlabel;
+								break;
+							case 3:
+								Infrastructure.label = x.Mainlabel;
+								break;
+							case 4:
+								Contact.label = x.Mainlabel;
+								break;
+						}
+						index++;
+//						Alert.show("MainNavigation "+str+ "   "+ObjectUtil.toString(str2));
+							if(str==(str2)){
+//								Alert.show("MainNavigation "+String(x.innerLabel));
+								var miniXmlList:XMLList = x.innerLabel;
+								
+								for each( var xm:XML in miniXmlList){
+									var lbl:Label = new Label;
+										lbl.text = xm;
+										lbl.useHandCursor = true;
+										lbl.buttonMode = true;
+										lbl.mouseChildren = false;
+										lbl.addEventListener(MouseEvent.CLICK, onMenuShow);
+									departmentDrop.addChild(lbl);
+								}
+							}
+							if(str==(str3)){
+								var miniXmlList:XMLList = x.innerLabel;
+								for each( var xm:XML in miniXmlList){
+									var lbl:Label = new Label;
+									lbl.text = xm;
+									lbl.useHandCursor = true;
+									lbl.buttonMode = true;
+									lbl.mouseChildren = false;
+									lbl.addEventListener(MouseEvent.CLICK, onMenuShow);
+									coursesPOP.addChild(lbl);
+								}
+							}
+							 str= null;
+							 str2 =null;
+							 str3 =null;
+						}
+						break;
+				}
+			}
+			
+			private function onMenuShow(event:MouseEvent):void { 
+//				Alert.show(""+ObjectUtil.toString(event.currentTarget.text));
+				var obj:Object = new Object;
+				obj.viewID = event.currentTarget.text;
+				_appControls.DispMainEvent("VIEW_CHANGE",true,obj);
+			} 
+			protected function Courses_rollOverHandler(event:MouseEvent):void
+			{
+				Courses.open();
+				
+			}
+			
+			protected function Courses_rollOutHandler(event:MouseEvent):void
+			{
+				Courses.close();
+			}
+			
+			protected function Departments_rollOutHandler(event:MouseEvent):void
+			{
+				Departments.close();
+				Courses.close();
+			}
+			
+			protected function Departments_rollOverHandler(event:MouseEvent):void
+			{
+				Departments.open();
+			}
+			
+			protected function departmentDrop_clickHandler(event:MouseEvent):void
+			{
+				
+//				Alert.show(""+ObjectUtil.toString(event.currentTarget.getChildren()));
+					
+			}
+			private function homeview():void{
+				
+				_appControls.DispMainEvent("HOME_VIEW",true,null);
+				mainFlex1.visible = false;
+				mainFlex.visible = true;
+			}
+			private function homeviewview():void{
+				var obj:Object = HOME
+				texableChild.text = HOME.label;
+				_appControls.DispMainEvent("IMAGE_MOVE",true,obj);
+				homeview();
+			}
+			[Bindable]
+			private var textColorId:String = new String;
+			[Bindable]
+			private var homeObject:Object = new Object;
+			private function HOME_clickHandler(event:MouseEvent):void
+			{
+				var obj:Object = event.currentTarget;
+				texableChild.text = event.currentTarget.label;
+				_appControls.DispMainEvent("IMAGE_MOVE",true,obj);
+				homeview();
+			}
+			
+			protected function about_clickHandler(event:MouseEvent):void
+			{
+//				FlexGlobals.topLevelApplication.triangleHeight=10;
+				textColorId = event.currentTarget.id;
+				_appControls.DispMainEvent("ABOUT_VIEW",true,null);
+				mainFlex1.visible = true;
+				mainFlex.visible = false;
+				var obj:Object = event.currentTarget;
+				texableChild.text = event.currentTarget.label;
+				_appControls.DispMainEvent("IMAGE_MOVE",true,obj);
+
+			}
+			
+			protected function removeAllChildren(container:*):void {
+				var containerDOC:DisplayObjectContainer = DisplayObjectContainer(container);
+				while (container.numChildren > 0) {
+					container.removeChildAt(0);
+				}
+			}
+			
+			protected function Contact_clickHandler(event:MouseEvent):void
+			{
+//				var obj:Object = new Object;
+//				obj.viewID = event.currentTarget.text;
+				var obj:Object = event.currentTarget;
+				texableChild.text = event.currentTarget.label;
+				_appControls.DispMainEvent("IMAGE_MOVE",true,obj);
+				homeview();
+				_appControls.DispMainEvent("CONTACT_VIEW",true,null);
+			}
+			
+			protected function Infrastructure_clickHandler(event:MouseEvent):void
+			{
+				var obj:Object = event.currentTarget;
+				texableChild.text = event.currentTarget.label;
+				_appControls.DispMainEvent("IMAGE_MOVE",true,obj);
+				_appControls.DispMainEvent("INFRASTRUCTURE_VIEW",true,null);
+			}
+			
+			protected function InfrastructurePop_rollOverHandler(event:MouseEvent):void
+			{
+					Infrastructure.open();
+			}
+			
+			protected function InfrastructurePop_rollOutHandler(event:MouseEvent):void
+			{
+				Infrastructure.close();
+				
+			}
+			
+			protected function label1_clickHandler(event:MouseEvent):void
+			{
+				var obj:Object = event.currentTarget;
+//				texableChild.text = event.currentTarget.label;
+//				_appControls.DispMainEvent("IMAGE_MOVE",true,obj);
+				_appControls.DispMainEvent("INFRASTRUCTURE_VIEW",true,null);
+				if(event.currentTarget.id=="libID"){
+				_appControls.DispMainEvent("SHOW_LIB",true,null);	
+				}else{
+					_appControls.DispMainEvent("SHOW_LABS",true,null);	
+				}
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<mx:Glow id="glowImage" duration="1000" alphaFrom="1.0" alphaTo="0.3" blurXFrom="0.0" blurXTo="50.0" blurYFrom="0.0"
+				 blurYTo="50.0" color="0xC8FE2E"/>
+		
+		<mx:Glow id="unglowImage" duration="1000" alphaFrom="0.3" alphaTo="1.0" blurXFrom="50.0" blurXTo="0.0"
+				 blurYFrom="50.0" blurYTo="0.0" color="0x40FF00"/>
+	</fx:Declarations>
+	<mx:Canvas width="100%" height="100%">
+		<s:HGroup width="100%" height="100%">
+			<s:Rect x="20" y="120" width="100%" height="100%">
+				<s:fill>
+					<s:LinearGradient>
+						<s:GradientEntry color="#084B8A"/>
+					</s:LinearGradient>
+				</s:fill>
+			</s:Rect>
+		</s:HGroup>
+		<mx:HBox height="100%" width="100%" paddingLeft="10"> 
+					<components:imagesmoothing source="com/Images/cvramanImage.png" width="105" height="100%" maintainProjectionCenter="false"
+											   click="{homeviewview()}" mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}"
+											   useHandCursor="true" buttonMode="true" mouseChildren="false"/>
+			<mx:VBox verticalGap="-8" horizontalGap="0" verticalAlign="middle" height="100%" fontStyle="italic">
+				<mx:Label text="Private Organization" fontWeight="bold" fontFamily="italic" color="#FFFFFF"/>
+				<mx:VBox verticalGap="0" horizontalGap="0" verticalAlign="middle" height="100%">
+					<mx:Label text="CV Raman Degree and " fontWeight="bold" fontSize="30" color="#FFFFFF"/>
+					<mx:Label text="PG College" fontWeight="bold" fontSize="30" color="#FFFFFF"/>
+				</mx:VBox>
+			</mx:VBox>
+			<s:Spacer width="60"/>
+			<mx:VBox width="100%" height="100%" verticalAlign="middle">
+				<mx:Label text="Affliated to Kakatiya University  " fontWeight="bold" fontFamily="italic" color="#FFFFFF"/>
+			</mx:VBox>
+			<s:Spacer width="100%"/>
+		</mx:HBox>
+		<mx:HBox width="100%" height="100%" >
+			<s:Spacer width="100%" id="spaceSetter"/>
+				<mx:HBox id="buttOnsBox" verticalAlign="bottom" height="100%" paddingBottom="20" horizontalGap="2">
+					<mx:PopUpButton  id="HOME"  width="130" 
+									 buttonMode="true" openAlways="true" label="HOME" click="HOME_clickHandler(event)"
+									 alpha="1.0" cornerRadius="10" skin="com.models.PopUpSkin"
+									 >
+						<mx:popUp>
+							<mx:VBox>
+								
+							</mx:VBox>
+						</mx:popUp>
+					</mx:PopUpButton>
+					<mx:PopUpButton  id="about"  width="130"
+									buttonMode="true" openAlways="true" click="about_clickHandler(event)"
+									alpha="1.0" cornerRadius="10" skin="com.models.PopUpSkin"
+									>
+						<mx:popUp>
+							<mx:VBox>
+								
+							</mx:VBox>
+						</mx:popUp>
+					</mx:PopUpButton>
+					<mx:PopUpButton id="Departments" skin="com.models.PopUpSkin" width="130"
+									buttonMode="true" openAlways="true"  click="HOME_clickHandler(event)"
+									rollOver="Departments_rollOverHandler(event)" openDuration="1000"
+									alpha="1.0"  cornerRadius="10" >
+						<mx:popUp>
+							<mx:VBox id="departmentDrop"  height="100%" width="100%"
+									 backgroundColor="#FFFFFF" backgroundAlpha="0.6" cornerRadius="10" click="departmentDrop_clickHandler(event)"
+									 rollOut="Departments_rollOutHandler(event)" rollOver="Departments_rollOverHandler(event)">
+							</mx:VBox>
+						</mx:popUp>
+					</mx:PopUpButton>
+					<mx:PopUpButton id="Courses" skin="com.models.PopUpSkin"  openDuration="500" width="130"
+									buttonMode="true" openAlways="true" rollOver="Courses_rollOverHandler(event)"
+									alpha="1.0" labelPlacement="left" click="HOME_clickHandler(event)"
+									 cornerRadius="10">
+						<mx:popUp>
+							<mx:VBox id="coursesPOP" rollOver="Courses_rollOverHandler(event)" 
+									  height="100%" width="100%" cornerRadius="10"
+									 backgroundColor="#FFFFFF" backgroundAlpha="0.6"
+									 rollOut="Courses_rollOutHandler(event)">
+								
+							</mx:VBox>
+						</mx:popUp>
+					</mx:PopUpButton>
+					<mx:PopUpButton id="Infrastructure" skin="com.models.PopUpSkin" width="130"
+									rollOver="InfrastructurePop_rollOverHandler(event)" 
+									buttonMode="true" openAlways="true" click="Infrastructure_clickHandler(event)"
+									alpha="1.0" cornerRadius="10">
+						<mx:popUp>
+							<mx:VBox id="InfrastructurePop" rollOver="InfrastructurePop_rollOverHandler(event)" 
+									 height="100%" width="100" cornerRadius="10"
+									 backgroundColor="#FFFFFF" backgroundAlpha="0.6" horizontalAlign="center" verticalAlign="middle"
+									 rollOut="InfrastructurePop_rollOutHandler(event)">
+								<mx:Label text="Labs" click="label1_clickHandler(event)" id="labsID"/>
+								<mx:Label text="Library" click="label1_clickHandler(event)" id="libID"/>
+							</mx:VBox>
+						</mx:popUp>
+					</mx:PopUpButton>
+					<mx:PopUpButton id="Contact" skin="com.models.PopUpSkin" width="130" 
+									buttonMode="true" openAlways="true" click="Contact_clickHandler(event)"
+									alpha="1.0" cornerRadius="10">
+						<mx:popUp>
+							<mx:VBox>
+								
+							</mx:VBox>
+						</mx:popUp>
+					</mx:PopUpButton>
+				</mx:HBox>
+			<s:Spacer width="20"/>
+		</mx:HBox>
+			<mx:VBox id="mainFlex" borderColor="red" x="{spaceSetter.width+HOME.x+8}" y="{spaceSetter.y+22+HOME.y}" label="anirudh" color="white" />
+		<mx:VBox id="mainFlex1" visible="false" borderColor="red" x="{spaceSetter.width+about.x+8}" y="{spaceSetter.y+22+HOME.y}" label="anirudh" color="white" />
+	</mx:Canvas>
+	<mx:VBox verticalAlign="middle" horizontalAlign="center" x="{spaceSetter.width+HOME.x+8}" id="textable" y="{spaceSetter.y+HOME.y}" width="120">
+		<!--<mx:Image source="com/Images/tooltip.png" x="{493+HOME.x}" y="{spaceSetter.y+HOME.y-1}" id="movingImage" maintainAspectRatio="false"
+				  height="{20+HOME.height}" width="{5+HOME.width}" visible="false"/>-->
+		<mx:Label text="HOME"   direction="rtl" id="texableChild" fontStyle="italic" fontWeight="bold" color="#FFFFFF"/>
+	</mx:VBox>
+</s:Group>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<department>
+<name>Department of Physics</name>
+<lectures>
+<name>M. Srikanth</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>4 Years</Exp>
+</lectures>
+<lectures>
+<name>K. Ravi Kumar</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>3 Years</Exp>
+</lectures>
+<lectures>
+<name>S. Hema Latha</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>2 Years</Exp>
+</lectures>
+<lectures>
+<name>Ch.Rajini</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>2 Years</Exp>
+</lectures>
+<lectures>
+<name>S. Ravinder</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>2 Years</Exp>
+</lectures>
+</department>

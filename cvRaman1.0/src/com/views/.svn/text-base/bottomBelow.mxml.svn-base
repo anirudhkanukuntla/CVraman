@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" creationComplete="group1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.Controllers.appControls;
+			import com.VoObjects.lecNames;
+			import com.VoObjects.onjShows;
+			import com.components.profSlot;
+			import com.models.mainEvent;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.utils.ObjectUtil;
+			private var _appControls:appControls = appControls.getInstance();
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				toggleId.selectedIndex = 1;
+				_appControls.buttDispatcher.addEventListener(mainEvent.MAIN_EVENT_DISP, eventTrac);
+				
+			}
+			[Bindable]
+			private var _departmentName:String = "";
+			public static var _profSlot:ClassFactory =  new ClassFactory(profSlot);
+			private function eventTrac(e:mainEvent):void
+			{
+				switch (e.eventType)
+				{
+					case "DEPARTMENT":
+						var mainCol:XML = e.obj as XML;
+						_departmentName = String(mainCol.name);
+						var mainlist:XMLList =  mainCol.lectures;
+						var arr:ArrayCollection = new ArrayCollection;
+						var index:uint=1;
+						for each(var x:XML in mainlist){
+						
+						var ne:* = _profSlot.newInstance();
+						var showsObjects:onjShows = new onjShows;
+						ne.Designation = x.Designation;
+						ne.Name = x.Name;
+						ne.Qualification = x.Qualification;
+						ne.Exp = x.Exp;
+												similarChbox.addChild(ne);
+						var lect:lecNames = new lecNames;
+						lect.Designation = x.Designation;
+						lect.Name = x.name;
+						lect.SNo = index;
+						lect.Qualification = x.Qualification;
+						lect.Exp = x.Exp;
+						arr.addItem(lect);
+						index++;
+					}
+						_appControls.depArray= arr;
+						_appControls.depArray.refresh();
+						break;
+					case "BOTTOM_VISIBLE":
+						toggleId.selectedIndex = 1;
+						break;
+					case "HOME_VIEW":
+						toggleId.selectedIndex = 1;
+						break;
+					case "ABOUT_VIEW":
+						toggleId.selectedIndex = 1;
+						break;
+					case "VIEW_CHANGE":
+						var dateNow:Date = new Date();
+						var str:String = "";
+						str =  "?uniqueID="+dateNow.minutes+dateNow.seconds+dateNow.milliseconds;
+						var str1:String = e.obj.viewID;
+						switch(str1){
+							case"Mathematics":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departMath+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 0;
+								break;
+							case"Botany":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departBot+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 1;
+								break;
+							case"Zoology":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departZoo+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 2;
+								break;
+							case"Physics":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departPhy+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 3;
+								break;
+							case"Chemistry":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departChe+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 4;
+								break;
+							case"Computer Science":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departCS+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 5;
+								break;
+							case"Commerce":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departCom+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 6;
+								break;
+							case"English":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departEng+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 7;
+								break;
+						}
+						break;
+				}
+			}
+			private var borderWeight:uint=5;
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:BorderContainer  borderWeight="{borderWeight}"  id="borderBox" visible="{toggleId.selectedIndex?0:1}"
+						y="60" x="10"
+						width="97%" height="100%">
+		<s:borderStroke>
+			<s:LinearGradientStroke rotation="90" weight="5">
+				<s:entries>
+					<s:GradientEntry color="#2E64FE" />
+				</s:entries>
+			</s:LinearGradientStroke>
+		</s:borderStroke>
+	</s:BorderContainer>
+	<mx:ViewStack id="toggleId" width="100%" height="100%" >
+		<mx:VBox width="100%" height="100%" paddingTop="10" verticalAlign="middle" horizontalAlign="center" >
+			<mx:Label  fontWeight="bold" fontSize="24" text="{_departmentName}" fontStyle="italic"/>
+			<mx:VBox id="similarChbox" width="100%" height="100%"/>
+			<s:Spacer height="10" width="10"/>
+		</mx:VBox>
+		<mx:VBox width="100%" height="100%">
+			<mx:Text width="1000" color="#000000" text="       The Institution, shaping its students into disciplined young citizens of good character and culture lays emphasis on practical experience so as to enable them to secure employment in Education Institutions. In its keen commitment to offer quality education, CVR, over the past 15 years has become a temple of knowledge and produced about 4800 eminent and skillfull graduate and Post graduates, who are successful in their careers, serving all over the state. "
+					 />
+		</mx:VBox>
+	</mx:ViewStack>
+</s:Group>

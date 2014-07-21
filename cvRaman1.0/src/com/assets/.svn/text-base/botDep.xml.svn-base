@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<department>
+<name>Department of Botany</name>
+<lectures>
+<name>Dr. T. Ugendhar</name>
+<Designation>Professor</Designation>
+<Qualification>Ph.D</Qualification>
+<Exp>8 Years</Exp>
+</lectures>
+<lectures>
+<name>Ashoka Charry</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>6 Years</Exp>
+</lectures>
+<lectures>
+<name>N. Sampath</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>4 Years</Exp>
+</lectures>
+<lectures>
+<name>G.Ramesh</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>3 Years</Exp>
+</lectures>
+<lectures>
+<name>MD. Azaruddin</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>2 Years</Exp>
+</lectures>
+</department>

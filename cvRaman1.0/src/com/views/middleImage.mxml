@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" creationComplete="group1_initializeHandler(event)" xmlns:components="com.components.*" xmlns:viewStackEffects="org.efflex.mx.viewStackEffects.*">
+	<fx:Script>
+		<![CDATA[
+			import com.Controllers.appControls;
+			import com.Controllers.effectsAll;
+			import com.models.mainEvent;
+			
+			import flashx.textLayout.formats.BackgroundColor;
+			
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			import mx.events.IndexChangedEvent;
+			import mx.events.ItemClickEvent;
+			import mx.utils.ObjectUtil;
+			
+			import spark.events.IndexChangeEvent;
+			
+			private var _appControls:appControls = appControls.getInstance();
+			private var t:Timer;
+			private var TIMER_INTERVAL:uint = 5000;
+			protected function group1_initializeHandler(event:FlexEvent):void
+			{
+				_appControls.buttDispatcher.addEventListener(mainEvent.MAIN_EVENT_DISP, eventTrac);
+//				toggleId.addEventListener(MouseEvent.MOUSE_OVER,stopTimer);
+			}
+			[Bindable]
+			private var sliderImage1Source:String="";
+			[Bindable]
+			private var sliderImage2Source:String="";
+			[Bindable]
+			private var sliderImage3Source:String="";
+			[Bindable]
+			private var sliderImage4Source:String="";
+			[Bindable]
+			private var sliderImage5Source:String="";
+			[Bindable]
+			private var sliderImage6Source:String="";
+			[Bindable]
+			private var sliderImage7Source:String="";
+			[Bindable]
+			private var sliderImage8Source:String="";
+			[Bindable]
+			private var _presentImage:String = null ;
+			private function eventTrac(e:mainEvent):void
+			{
+				switch (e.eventType)
+				{
+					case "IMAGE_LOAD":
+						var mainCol:XML = e.obj as XML;
+						sliderImage1Source = mainCol.mathematics.imageurl;
+						sliderImage2Source = mainCol.botany.imageurl;
+						sliderImage3Source = mainCol.zoology.imageurl;
+						sliderImage4Source = mainCol.physics.imageurl;
+						sliderImage5Source = mainCol.chemistry.imageurl;
+						sliderImage6Source = mainCol.computer.imageurl;
+						sliderImage7Source = mainCol.commerce.imageurl;
+						sliderImage8Source = mainCol.english.imageurl;
+						t = new Timer(TIMER_INTERVAL);
+						t.addEventListener(TimerEvent.TIMER, updateTimer);
+						t.start();
+						break;
+					case "VIEW_CHANGE":
+						if(t){
+							t.stop();
+						}
+						var str:String = e.obj.viewID;
+						effect.duration = 1;
+						switch(str){
+							case"Mathematics":
+								_togleIndex = 0;
+								toggleId.selectedIndex = 0;
+								toggleIdText.CourseName = "Mathematics";
+								toggleIdText.CourseDescription= "The science of numbers and their operations, interrelations, combinations and of space configurations and their structure.";
+								break;
+							case"Botany":
+								_togleIndex = 1;
+								toggleId.selectedIndex = 1;
+								toggleIdText.CourseName = "Botany";
+								toggleIdText.CourseDescription= " The properties and life phenomena exhibited by a plant, plant type, or plant group";
+								break;
+							case"Zoology":
+								_togleIndex = 2;
+								toggleId.selectedIndex = 2;
+								toggleIdText.CourseName = "Zoology";
+								toggleIdText.CourseDescription= " The properties and vital phenomena exhibited by an animal, animal type, or group";
+								
+								break;
+							case"Physics":
+								_togleIndex = 3;
+								toggleId.selectedIndex = 3;
+								toggleIdText.CourseName = "Physics";
+								toggleIdText.CourseDescription= " A science that deals with matter and energy and their interactions"
+								
+								break;
+							case"Chemistry":
+								_togleIndex = 4;
+								toggleId.selectedIndex = 4;
+								toggleIdText.CourseName = "Chemistry";
+								toggleIdText.CourseDescription= " A science that deals with the composition, structure, and properties of substances and with the transformations that they undergo"
+								
+								break;
+							case"Computer Science":
+								_togleIndex = 5;
+								toggleId.selectedIndex = 5;
+								toggleIdText.CourseName = "Computer Science";
+								toggleIdText.CourseDescription= " A branch of science that deals with the theory of computation or the design of computers"
+									
+								break;
+							case"Commerce":
+								_togleIndex = 6;
+								toggleId.selectedIndex = 6;
+								toggleIdText.CourseName = "Commerce";
+								toggleIdText.CourseDescription= " The exchange or buying and selling of commodities on a large scale involving transportation from place to place"
+									
+								break;
+							case"English":
+								_togleIndex = 7;
+								toggleId.selectedIndex = 7;
+								toggleIdText.CourseName = "English";
+								toggleIdText.CourseDescription= " Approximately 375 million people speak English as their first language.English today is probably the third largest language by number of native speakers,"
+								
+								break;
+						}
+						toggleId.visible = false;
+						break;
+					case "HOME_VIEW":
+							t.reset();
+							t.start();
+							_togleIndex = 0;
+						toggleId.selectedIndex = 0;
+						toggleId.visible = true;
+						textChange();
+						break;
+					case "DESP_EFECT_END":
+						_presentImage = String(e.obj.id)
+						if(sliderImage1.x==0){
+							lightImage.setStyle("backgroundColor","#084B8A");
+						}else{
+							lightImage.setStyle("backgroundColor","#F7D358");
+						}
+						break;
+				}
+			}
+			private var imageEffects:effectsAll = new effectsAll;
+			[Bindable]
+			private var _togleIndex:uint = 0;
+			private function updateTimer(e:TimerEvent):void{
+				_togleIndex++;
+				effect.duration = 500;
+				
+				/* if(_togleIndex>7){
+					_togleIndex = 0;
+				} */
+//				 if((toggleId.selectedIndex)%7==0 && toggleId.selectedIndex !=0 ){
+//					viewStack.addChildAt(sliderImage1,toggleId.selectedIndex); 
+//					viewStack.addChildAt(sliderImage2,toggleId.selectedIndex+1); 
+//					viewStack.addChildAt(sliderImage3,toggleId.selectedIndex+2); 
+//					viewStack.addChildAt(sliderImage4,toggleId.selectedIndex+3); 
+//					viewStack.addChildAt(sliderImage5,toggleId.selectedIndex+4); 
+//					viewStack.addChildAt(sliderImage6,toggleId.selectedIndex+5); 
+//					viewStack.addChildAt(sliderImage7,toggleId.selectedIndex+6); 
+//					viewStack.addChildAt(sliderImage8,toggleId.selectedIndex+7); 
+//					/* for(var jh:uint =toggleId.selectedIndex;jh>=0;jh--){
+//						viewStack.removeItemAt(jh);
+//					} */
+//				} 
+				  if(_togleIndex>7){
+				_togleIndex = 0;
+				}  
+				toggleId.selectedIndex = _togleIndex;
+				textChange();
+				changeHandler();
+			}
+		
+			import mx.controls.Button;
+			private function textChange():void{
+				switch(_togleIndex){
+					case 0:
+						toggleIdText.CourseName = "Mathematics";
+						toggleIdText.CourseDescription= "The science of numbers and their operations, interrelations, combinations and of space configurations and their structure.";
+						break;
+					case 1:
+						toggleIdText.CourseName = "Botany";
+						toggleIdText.CourseDescription= " The properties and life phenomena exhibited by a plant, plant type, or plant group";
+						break;
+					case 2:
+						toggleIdText.CourseName = "Zoology";
+						toggleIdText.CourseDescription= " The properties and vital phenomena exhibited by an animal, animal type, or group";
+						break;
+					case 3:
+						toggleIdText.CourseName = "Physics";
+						toggleIdText.CourseDescription= " A science that deals with matter and energy and their interactions"
+						break;
+					case 4:
+						toggleIdText.CourseName = "Chemistry";
+						toggleIdText.CourseDescription= " A science that deals with the composition, structure, and properties of substances and with the transformations that they undergo"
+						break;
+					case 5:
+						toggleIdText.CourseName = "Computer Science";
+						toggleIdText.CourseDescription= " A branch of science that deals with the theory of computation or the design of computers"
+						break;
+					case 6:
+						toggleIdText.CourseName = "Commerce";
+						toggleIdText.CourseDescription= " The exchange or buying and selling of commodities on a large scale involving transportation from place to place"
+						break;
+					case 7:
+						toggleIdText.CourseName = "English";
+						toggleIdText.CourseDescription= " Approximately 375 million people speak English as their first language.English today is probably the third largest language by number of native speakers,"
+						break;
+				}
+			}
+			private function changeHandler(): void {
+				for(var i:int=0; i < toggleId.dataProvider.length; i++) {
+					var button1:Button = Button(toggleId.getChildAt(i)); 
+					if(button1.selected) {
+						button1.styleName="selectedStyle";
+					} else { 
+						button1.styleName="unselectedStyle";
+					} 
+				}
+//				_appControls.DispMainEvent("BOTTOM_VISIBLE",true,null);
+			}
+			
+			
+			protected function toggleId_itemClickHandler(event:ItemClickEvent):void
+			{
+				effect.duration= 500;
+				_togleIndex = toggleId.selectedIndex ;
+				textChange();
+				if(t.running){
+					t.reset();
+					t.start();
+				}
+				changeHandler();
+			}
+			private var borderWeight:uint=5;
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<viewStackEffects:List id="effect" direction="horizontal" duration="500"/>
+	</fx:Declarations>
+	
+<!--	<s:BorderContainer  borderWeight="{borderWeight}"  id="borderBox12"  y="{imagesHolder.y-borderWeight}" x="{imagesHolder.x-borderWeight}"
+						width="{imagesHolder.width+borderWeight+borderWeight}" height="100%">
+		<s:borderStroke>
+			<s:LinearGradientStroke rotation="90" weight="5">
+				<s:entries>
+					<s:GradientEntry color="red" />
+				</s:entries>
+			</s:LinearGradientStroke>
+		</s:borderStroke>
+	</s:BorderContainer>-->
+	<mx:Canvas width="100%" height="100%" id="imagesHolder"  verticalScrollPolicy="off"
+			   horizontalScrollPolicy="off">
+		<mx:ViewStack  horizontalScrollPolicy="off" verticalScrollPolicy="off" id="viewStack" includeInLayout="true" 
+					   historyManagementEnabled="true" cacheAsBitmap="true"
+					   focusEnabled="true" 
+					  height="{FlexGlobals.topLevelApplication.middleimage.height}" width="{this.width-5}" >
+			<mx:VBox hideEffect="effect" showEffect="effect" >
+				<components:imagesmoothing source="{sliderImage1Source}"
+										   hideEffect="effect" showEffect="effect"  maintainAspectRatio="false" id="sliderImage1"
+										  width="100%" height="100%" />
+			</mx:VBox>
+			<mx:VBox hideEffect="effect" showEffect="effect" >
+				<components:imagesmoothing  source="{sliderImage2Source}"
+					hideEffect="effect" showEffect="effect"   maintainAspectRatio="false" id="sliderImage2"
+										   width="100%" height="100%"/>
+			</mx:VBox>
+			<mx:VBox hideEffect="effect" showEffect="effect" >
+				<components:imagesmoothing source="{sliderImage3Source}"
+										   hideEffect="effect" showEffect="effect"   maintainAspectRatio="false" id="sliderImage3"
+										   width="100%" height="100%" />
+			</mx:VBox>
+			<mx:VBox hideEffect="effect" showEffect="effect" >
+				<components:imagesmoothing source="{sliderImage4Source}" maintainAspectRatio="false" id="sliderImage4"
+										   width="100%" height="100%"  hideEffect="effect" showEffect="effect"    />
+			</mx:VBox  >
+			<mx:VBox hideEffect="effect" showEffect="effect" >
+				<components:imagesmoothing source="{sliderImage5Source}" maintainAspectRatio="false" id="sliderImage5"
+										   width="100%" height="100%"  hideEffect="effect" showEffect="effect"   />
+			</mx:VBox  >
+			<mx:VBox hideEffect="effect" showEffect="effect" >
+				<components:imagesmoothing source="{sliderImage6Source}"  maintainAspectRatio="false" id="sliderImage6"
+										   width="100%" height="100%"  hideEffect="effect" showEffect="effect"   />
+			</mx:VBox>
+			<mx:VBox hideEffect="effect" showEffect="effect" >
+				<components:imagesmoothing source="{sliderImage7Source}" maintainAspectRatio="false" id="sliderImage7"
+										   width="100%" height="100%"    />
+			</mx:VBox>
+			<mx:VBox hideEffect="effect" showEffect="effect" >
+				<components:imagesmoothing source="{sliderImage8Source}"  maintainAspectRatio="false" id="sliderImage8"
+										   width="100%" height="100%"  hideEffect="effect" showEffect="effect"   />
+			</mx:VBox>
+		</mx:ViewStack>
+<!--		<mx:HScrollBar id="hScrollBar" width="400" creationComplete="{hScrollBar.setScrollProperties( 8, 0, 8, 1 );}" scroll="{viewStack.selectedIndex = hScrollBar.scrollPosition}"/>
+--><!--		<mx:Image source="com/Images/books.jpg" x="3" y="{imagesHolder.y+300-smallImage.height-3}" id="smallImage" height="100"/>
+-->	<mx:HBox backgroundColor="#084B8A" backgroundAlpha="0.5" height="100" width="40%" x="{imagesHolder.width-lightImage.width-40}"
+			 y="{imagesHolder.y+470-lightImage.height-120}" cornerRadius="10"
+				 id="lightImage" >
+		<mx:Canvas  cornerRadius="5" >
+			<components:toggleText id="toggleIdText" textWidth="380"/>
+			<mx:ToggleButtonBar dataProvider="{viewStack}" width="180"  horizontalGap="3" height="10" x="{lightImage.width-toggleId.width-10}"
+								 id="toggleId" useHandCursor="true" buttonMode="true" itemClick="toggleId_itemClickHandler(event)"
+								 childIndexChange=" changeHandler()"
+								y="4" >
+			</mx:ToggleButtonBar>
+		</mx:Canvas>
+	</mx:HBox>
+	</mx:Canvas>
+</s:Group>

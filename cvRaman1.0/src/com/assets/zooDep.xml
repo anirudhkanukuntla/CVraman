@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<department>
+<name>Department of Zoology</name>
+<lectures>
+<name>Dr. Surendar Reddy</name>
+<Designation>Professor </Designation>
+<Qualification>Ph.D</Qualification>
+<Exp>6 Years</Exp>
+</lectures>
+<lectures>
+<name>Dr. Bramamm</name>
+<Designation>Professor </Designation>
+<Qualification>Ph.D</Qualification>
+<Exp>3 Years</Exp>
+</lectures>
+<lectures>
+<name>MD. Javid</name>
+<Designation>Professor </Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>3 Years</Exp>
+</lectures>
+<lectures>
+<name>S.Jyothi</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>2 Years</Exp>
+</lectures>
+<lectures>
+<name>S. Ravinder</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>2 Years</Exp>
+</lectures>
+<lectures>
+<name>Sharadha</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>1 Years</Exp>
+</lectures>
+</department>

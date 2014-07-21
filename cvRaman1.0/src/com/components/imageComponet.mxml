@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" xmlns:components="com.components.*">
+	
+	<fx:Script>
+		<![CDATA[
+			
+			protected function BotanyHolder_rollOverHandler(event:MouseEvent):void
+			{
+				if(biggerImage.visible==false){
+					biggerImage.visible=true;			
+					sliderImage3.source="com/Images/botonyLab1.png";
+				}
+				
+			}
+			
+			protected function BotanyHolder_rollOutHandler(event:MouseEvent):void
+			{
+				biggerImage.visible=false;	
+			}
+			
+			protected function BotanyHolder1_rollOutHandler(event:MouseEvent):void
+			{
+				biggerImage.visible=false;	
+			}
+			
+			protected function BotanyHolder1_rollOverHandler(event:MouseEvent):void
+			{
+				biggerImage.visible=true;			
+				sliderImage3.source="com/Images/botonyLab3.png";
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<mx:Glow id="glowImage" duration="1000" alphaFrom="1.0" alphaTo="0.3" blurXFrom="0.0" blurXTo="50.0" blurYFrom="0.0"
+				 blurYTo="50.0" color="0xC8FE2E"/>
+		
+		<mx:Glow id="unglowImage" duration="1000" alphaFrom="0.3" alphaTo="1.0" blurXFrom="50.0" blurXTo="0.0"
+				 blurYFrom="50.0" blurYTo="0.0" color="0x40FF00"/>
+		<mx:Resize id="resizeBig" 
+				   widthFrom="22" widthTo="44" 
+				   heightFrom="27" heightTo="54"
+				   />
+		<mx:Resize id="resizeSmall" 
+				   widthFrom="44" widthTo="22" 
+				   heightFrom="54" heightTo="27"
+				   />
+	</fx:Declarations>
+	<mx:VBox width="100%" height="100%">
+		<mx:HBox>
+			<s:BorderContainer backgroundColor="0x406d8d" backgroundAlpha="0.6" 
+							   buttonMode="true" 
+							   rollOver="BotanyHolder_rollOverHandler(event)"
+							   rollOut="BotanyHolder_rollOutHandler(event)"
+							   useHandCursor="true" 
+							   rollOverEffect="{glowImage}" rollOutEffect="{unglowImage}" borderColor="#084B8A" borderStyle="solid" borderWeight="5" id="BotanyHolder">
+				<components:imagesmoothing source="com/Images/botonyLab1.png"
+										   hideEffect="effect" showEffect="effect"  maintainAspectRatio="false" id="sliderImage1"
+										   width="100" height="100" />
+			</s:BorderContainer>
+			<s:BorderContainer backgroundColor="0x406d8d" backgroundAlpha="0.6" 
+							   buttonMode="true" 
+							   useHandCursor="true" rollOut="BotanyHolder1_rollOutHandler(event)"
+							   rollOver="BotanyHolder1_rollOverHandler(event)"
+							   rollOverEffect="{glowImage}" rollOutEffect="{unglowImage}" borderColor="#084B8A" borderStyle="solid" borderWeight="5" id="BotanyHolder1">
+				<components:imagesmoothing source="com/Images/botonyLab2.png"
+										   hideEffect="effect" showEffect="effect"  maintainAspectRatio="false" id="sliderImage2"
+										   width="100" height="100" />
+			</s:BorderContainer>
+		</mx:HBox>
+		<mx:HBox id="biggerImage" width="100%" height="100%" visible="false">
+			<s:BorderContainer backgroundColor="0x406d8d" backgroundAlpha="0.6" 
+							   buttonMode="true" 
+							   rollOver="{resizeBig.play()}" 
+							   rollOut="{resizeSmall.play()}"
+							   useHandCursor="true" 
+							   rollOverEffect="{glowImage}" rollOutEffect="{unglowImage}" borderColor="#084B8A" borderStyle="solid" borderWeight="5" id="BotanyHolder3">
+				<components:imagesmoothing 
+					hideEffect="effect" showEffect="effect"  maintainAspectRatio="false" id="sliderImage3"
+					width="100" height="100" />
+			</s:BorderContainer>
+			
+		</mx:HBox>
+	</mx:VBox>
+	
+</s:Group>

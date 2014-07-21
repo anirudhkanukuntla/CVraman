@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="90%" height="100%" creationComplete="group1_creationCompleteHandler(event)" xmlns:components="com.components.*">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			public var Name:String;
+			public var Designation:String;
+			public var Qualification:String;
+			public var Exp:String;
+			private var borderWeight:uint=5;
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<mx:Glow id="glowImage" duration="1000" alphaFrom="1.0" alphaTo="0.3" blurXFrom="0.0" blurXTo="50.0" blurYFrom="0.0"
+				 blurYTo="50.0" color="0xC8FE2E"/>
+		
+	</fx:Declarations>
+	<mx:VBox width="100%" height="100%">
+	<mx:HBox  paddingLeft="10" paddingTop="20" width="100%" height="100%" verticalAlign="middle">
+		<components:imagesmoothing source="com/Images/cvramanImage.png" width="105" maintainProjectionCenter="false"
+								    mouseDownEffect="{glowImage}"
+								   useHandCursor="true" buttonMode="true" mouseChildren="false"/>
+		<s:Spacer width="100%"/>
+	<mx:VBox paddingLeft="10" width="100%" height="100%">
+		<mx:Label width="100%" text="{Name}"/>
+		<mx:Label width="100%" text="{Designation}"/>
+		<mx:Label width="100%" text="{Qualification}"/>
+		<mx:Label width="100%" text="{Exp}"/>
+	</mx:VBox>
+</mx:HBox>
+		<mx:HBox width="100%" height="2" backgroundColor="red" paddingLeft="10"/>
+	</mx:VBox>
+</s:Group>

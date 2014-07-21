@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<department>
+<name>Department of Commerce</name>
+<lectures>
+<name>V.Venkata Ramana</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Com</Qualification>
+<Exp>8 Years</Exp>
+</lectures>
+<lectures>
+<name>B. Ravinder</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Com</Qualification>
+<Exp>7 Years</Exp>
+</lectures>
+<lectures>
+<name>A. Ravi Kumar</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.B.A</Qualification>
+<Exp>5 Years</Exp>
+</lectures>
+<lectures>
+<name>P. Suneela</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Com</Qualification>
+<Exp>5 Years</Exp>
+</lectures>
+<lectures>
+<name>S. Srinivas</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Com</Qualification>
+<Exp>3 Years</Exp>
+</lectures>
+<lectures>
+<name>A. Mallesh</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Com</Qualification>
+<Exp>3 Years</Exp>
+</lectures>
+<lectures>
+<name>P. Satyam</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Com</Qualification>
+<Exp>2 Years</Exp>
+</lectures>
+<lectures>
+<name>SD. Jasmin</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.B.A</Qualification>
+<Exp>1 Years</Exp>
+</lectures>
+</department>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<department>
+<name>Department of Mathematics</name>
+<lectures>
+<name>A. Ramesh</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>10 Years</Exp>
+</lectures>
+<lectures>
+<name>Ch. Kamal</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>10 Years</Exp>
+</lectures>
+<lectures>
+<name>N. Ramesh</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>8 Years</Exp>
+</lectures>
+<lectures>
+<name>A. Hemalatha</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>7 Years</Exp>
+</lectures>
+<lectures>
+<name>O.Odelu</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>3 Years</Exp>
+</lectures>
+<lectures>
+<name>S. Kalavathi</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>2 Years</Exp>
+</lectures>
+</department>

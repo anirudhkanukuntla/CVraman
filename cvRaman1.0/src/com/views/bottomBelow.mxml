@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" creationComplete="group1_creationCompleteHandler(event)" xmlns:components="com.components.*">
+	<fx:Script>
+		<![CDATA[
+			import com.Controllers.appControls;
+			import com.Controllers.darkLine;
+			import com.Controllers.sharpShape;
+			import com.VoObjects.lecNames;
+			import com.VoObjects.onjShows;
+			import com.components.profSlot;
+			import com.google.maps.InfoWindowOptions;
+			import com.google.maps.LatLng;
+			import com.google.maps.MapType;
+			import com.models.mainEvent;
+			
+			import flash.net.navigateToURL;
+			
+			import mx.collections.ArrayCollection;
+			import mx.containers.HBox;
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.utils.ObjectUtil;
+			private var _appControls:appControls = appControls.getInstance();
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				toggleId.selectedIndex = 1;
+				_appControls.buttDispatcher.addEventListener(mainEvent.MAIN_EVENT_DISP, eventTrac);
+				
+			}
+			[Bindable]
+			private var _departmentName:String = "";
+			public static var _profSlot:ClassFactory =  new ClassFactory(profSlot);
+			private function eventTrac(e:mainEvent):void
+			{
+				switch (e.eventType)
+				{
+					case "COLLEGE_PROFILE":
+						var mainCol:XML = e.obj as XML;
+						_departmentName = String(mainCol.name);
+						var mainlist:XMLList =  mainCol.lectures;
+						var arr:ArrayCollection = new ArrayCollection;
+						var index:uint=1;
+						if(similarChbox1.numChildren>0){
+							similarChbox1.removeAllChildren();
+						}
+						for each(var x:XML in mainlist){
+						var ne:* = _profSlot.newInstance();
+						var showsObjects:onjShows = new onjShows;
+						ne.Designation = x.Designation;
+						//						Alert.show( ""+x.Name);
+						ne.Name = x.name;
+						ne.Qualification = x.Qualification;
+						ne.Exp = x.Exp;
+						ne.showbool=false;
+						similarChbox1.addChild(ne);
+						var lect:lecNames = new lecNames;
+						lect.Designation = x.Designation;
+						lect.Name = x.name;
+						lect.SNo = index;
+						lect.Qualification = x.Qualification;
+						lect.Exp = x.Exp;
+						arr.addItem(lect);
+						index++;
+					}
+						toggleId.selectedIndex = 2;
+						_appControls.depArray= arr;
+						_appControls.depArray.refresh();
+						break;
+					case "DEPARTMENT":
+						var mainCol:XML = e.obj as XML;
+						_departmentName = String(mainCol.name);
+						var mainlist:XMLList =  mainCol.lectures;
+						var arr:ArrayCollection = new ArrayCollection;
+						var index:uint=1;
+						if(similarChbox.numChildren>0){
+							similarChbox.removeAllChildren();
+						}
+						for each(var x:XML in mainlist){
+						var ne:* = _profSlot.newInstance();
+						var showsObjects:onjShows = new onjShows;
+						ne.Designation = x.Designation;
+//						Alert.show( ""+x.Name);
+						ne.Name = x.name;
+						ne.Qualification = x.Qualification;
+						ne.Exp = x.Exp;
+						similarChbox.addChild(ne);
+						var lect:lecNames = new lecNames;
+						lect.Designation = x.Designation;
+						lect.Name = x.name;
+						lect.SNo = index;
+						lect.Qualification = x.Qualification;
+						lect.Exp = x.Exp;
+						arr.addItem(lect);
+						index++;
+					}
+						_appControls.depArray= arr;
+						_appControls.depArray.refresh();
+						break;
+					case "BOTTOM_VISIBLE":
+//						if(){
+//						toggleId.selectedIndex = 1;
+//						}
+						break;
+					case "HOME_VIEW":
+						toggleId.selectedIndex = 1;
+						aboutcvraman.source="com/Images/kakatiya-gate-1.jpg";
+						break;
+					case "ABOUT_VIEW":
+						toggleId.selectedIndex = 2;
+						aboutcvraman.source="com/Images/cvramanImage.png";
+						break;
+					case "INFRASTRUCTURE_VIEW":
+						toggleId.selectedIndex = 4;
+						break;
+					case"CONTACT_VIEW":
+//						Alert.show("CONTACT_VIEW")
+						toggleId.selectedIndex = 3;
+						break;
+					case "VIEW_CHANGE":
+						var dateNow:Date = new Date();
+						var str:String = "";
+						str =  "?uniqueID="+dateNow.minutes+dateNow.seconds+dateNow.milliseconds;
+						var str1:String = e.obj.viewID;
+						switch(str1){
+							case"Mathematics":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departMath+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 0;
+								break;
+							case"Botany":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departBot+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 1;
+								break;
+							case"Zoology":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departZoo+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 2;
+								break;
+							case"Physics":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departPhy+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 3;
+								break;
+							case"Chemistry":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departChe+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 4;
+								break;
+							case"Computer Science":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departCS+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 5;
+								break;
+							case"Commerce":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departCom+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 6;
+								break;
+							case"English":
+								_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._departEng+str,"DEPARTMENT");
+								toggleId.selectedIndex = 0;
+								//								toggleId.selectedIndex = 7;
+								break;
+						}
+						break;
+				}
+			}
+			private var borderWeight:uint=5;
+			private function onMapReady(event:Event):void {
+				mapView.setCenter(new LatLng(18.879444,79.438889), 18, MapType.NORMAL_MAP_TYPE);
+				var cosVBbox:VBox = new VBox;
+				cosVBbox.setStyle("backgroundColor","0x01325a");
+				cosVBbox.setStyle("backgroundAlpha","0.8");
+				cosVBbox.setStyle("cornerRadius","5");
+				var mailabl1:mx.controls.Label = new mx.controls.Label;
+				var mailabl2:mx.controls.Label = new mx.controls.Label;
+				var mailabl3:mx.controls.Label = new mx.controls.Label;
+				var mailabl4:mx.controls.Label = new mx.controls.Label;
+				var mailabl5:mx.controls.Label = new mx.controls.Label;
+				//one
+				mailabl1.setStyle("fontWeight","bold");
+				mailabl1.setStyle("fontStyle","italic");
+				mailabl1.setStyle("color","#FFFFFF");
+				mailabl1.setStyle("fontSize","20");
+				//two
+				mailabl2.setStyle("fontWeight","bold");
+				mailabl2.setStyle("fontStyle","italic");
+				mailabl2.setStyle("color","#FFFFFF");
+				mailabl2.setStyle("fontSize","20");
+				//three
+				mailabl3.setStyle("fontWeight","bold");
+				mailabl3.setStyle("fontStyle","italic");
+				mailabl3.setStyle("color","#FFFFFF");
+				mailabl3.setStyle("fontSize","20");
+				//four
+				mailabl4.setStyle("fontWeight","bold");
+				mailabl4.setStyle("fontStyle","italic");
+				mailabl4.setStyle("color","#FFFFFF");
+				mailabl4.setStyle("fontSize","20");
+				//five
+				mailabl5.setStyle("fontWeight","bold");
+				mailabl5.setStyle("fontStyle","italic");
+				mailabl5.setStyle("color","#FFFFFF");
+				mailabl5.setStyle("fontSize","20");
+				
+				mailabl1.text = "CVRaman Degree college";
+				mailabl2.text = "Hanuman nagar";
+				mailabl3.text = "Mancheriyal";
+				mailabl4.text = "504208";
+				mailabl5.text = "Adilabad";
+				cosVBbox.addChild(mailabl1);
+				cosVBbox.addChild(mailabl2);
+				cosVBbox.addChild(mailabl3);
+				cosVBbox.addChild(mailabl4);
+				cosVBbox.addChild(mailabl5);
+				mapView.openInfoWindow(mapView.getCenter(), new InfoWindowOptions({customContent:cosVBbox,hasShadow:true,hasCloseButton:false,ALIGN_CENTER:1,hasTail:true}));
+			}
+			//com/Images/cvramanImage.png
+			
+			protected function vbox1_clickHandler(event:MouseEvent):void
+			{
+				mapHolder.visible=true;
+				callusHolder.visible = false;
+				emailHolder.visible = false;
+				SocialHolder.visible = false;
+			}
+			
+			protected function callusHolder_clickHandler(event:MouseEvent):void
+			{
+				callusHolder.visible = true;
+				mapHolder.visible=false;
+				emailHolder.visible = false;
+				SocialHolder.visible = false;
+			}
+			
+			protected function vbox2_clickHandler(event:MouseEvent):void
+			{
+				callusHolder.visible = false;
+				mapHolder.visible=false;
+				emailHolder.visible = true;
+				SocialHolder.visible = false;
+			}
+			
+			protected function vbox3_clickHandler(event:MouseEvent):void
+			{
+				callusHolder.visible = false;
+				mapHolder.visible=false;
+				emailHolder.visible = false;
+				SocialHolder.visible = true;
+			}
+			
+			protected function image1_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				mailme(event.currentTarget.name);
+			}
+			
+			private function mailme(str:String):void
+			{
+				var u:URLRequest = new URLRequest("mailto:" + str);
+				navigateToURL(u,"_self");
+			}
+			
+
+			protected function label1_clickHandler(event:MouseEvent):void
+			{
+				if(event.currentTarget.id==missionHolder.id){
+					missionHolder.setStyle("borderColor","0xC8FE2E");
+					viewsfordetails.selectedIndex=0;
+					similarChbox1.visible=false;
+					depnameID.visible = false;
+				}else{
+					missionHolder.setStyle("borderColor","#084B8A");
+				}
+					
+				if(event.currentTarget.id==profHolder.id){
+					profHolder.setStyle("borderColor","0xC8FE2E");
+					_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath._colProf,"COLLEGE_PROFILE");
+					viewsfordetails.selectedIndex=1;
+					similarChbox1.visible=true;
+					depnameID.visible = true;
+				}else{
+					profHolder.setStyle("borderColor","#084B8A");
+				}
+				
+				if(event.currentTarget.id==uniHolder.id){
+					uniHolder.setStyle("borderColor","0xC8FE2E");
+					viewsfordetails.selectedIndex=2;
+					similarChbox1.visible=false;
+					depnameID.visible = false;
+				}else{
+					uniHolder.setStyle("borderColor","#084B8A");
+				}
+				
+				if(event.currentTarget.id==organiHolder.id){
+					organiHolder.setStyle("borderColor","0xC8FE2E");
+				}else{
+					organiHolder.setStyle("borderColor","#084B8A");
+				}
+				
+			}
+			
+			protected function navigateFun(event:MouseEvent):void
+			{
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<mx:Glow id="glowImage" duration="1000" alphaFrom="1.0" alphaTo="0.3" blurXFrom="0.0" blurXTo="50.0" blurYFrom="0.0"
+				 blurYTo="50.0" color="0xC8FE2E"/>
+		
+		<mx:Glow id="unglowImage" duration="1000" alphaFrom="0.3" alphaTo="1.0" blurXFrom="50.0" blurXTo="0.0"
+				 blurYFrom="50.0" blurYTo="0.0" color="0x40FF00"/>
+	</fx:Declarations>
+	<s:BorderContainer  borderWeight="{borderWeight}"  id="borderBox" visible="{toggleId.selectedIndex?0:1}"
+						y="50" x="10"
+						width="97%" height="100%">
+		<s:borderStroke>
+			<s:LinearGradientStroke rotation="90" weight="5">
+				<s:entries>
+					<s:GradientEntry color="#2E64FE" />
+				</s:entries>
+			</s:LinearGradientStroke>
+		</s:borderStroke>
+	</s:BorderContainer>
+	<mx:Image width="100%" height="100%" maintainAspectRatio="false" source="com/Images/kakatiya-gate-1.jpg" alpha="0.3" id="aboutcvraman" />
+	<mx:ViewStack id="toggleId" width="100%" height="100%" backgroundAlpha="0">
+		<mx:VBox width="100%" height="100%" paddingTop="10" verticalAlign="top" horizontalAlign="center" backgroundAlpha="0">
+			<mx:Label  fontWeight="bold" fontSize="24" text="{_departmentName}" fontStyle="italic"/>
+			<mx:VBox width="100%" height="900">
+				<mx:VBox id="similarChbox" width="100%" backgroundAlpha="0"
+						 horizontalGap="0" verticalGap="0">
+				</mx:VBox>
+			</mx:VBox>
+			<mx:HBox paddingLeft="5" width="95%" height="2" >
+				<mx:HBox  width="100%" height="2" backgroundColor="#2E64FE" />
+			</mx:HBox>
+			<s:Spacer height="10" width="10"/>
+		</mx:VBox>
+		<mx:VBox width="100%" backgroundAlpha="0" paddingLeft="10" paddingTop="50" horizontalScrollPolicy="off" paddingRight="10"
+				 verticalGap="50" horizontalGap="50">
+		<mx:HBox width="100%"  backgroundAlpha="0"  horizontalScrollPolicy="off" >
+			<s:BorderContainer backgroundAlpha="0.6" borderColor="#084B8A" borderStyle="solid" borderWeight="5" 
+							   buttonMode="true" cornerRadius="5">
+				<mx:HBox width="100%" height="100%" paddingLeft="10" paddingTop="5" paddingBottom="5" id="homePageBorder">
+					 <components:imagesmoothing source="com/Images/collegePic.png" width="{defaultText.height+100}" maintainAspectRatio="false"
+												height="{defaultText.height}"/>
+					 <mx:Text  fontSize="20" width="{this.width-defaultText.height-145}" fontWeight="bold" fontStyle="italic" 
+							   id="defaultText" color="#084B8A" text="       Credit is like fire, When you have kindled it you may easily preserve it, but once you extinguish it, you will find it an arduous task to rekindle it again. The way to a good reputation is to endeavor to be what you desire to appear.The Mission of the College is to serve as a center to ENLIGHTEN ENTHUSIASM among students for their future ENDEAVOURS.The Institution, shaping its students into disciplined young citizens of good character and culture lays emphasis on practical experience so as to enable them to secure employment in Education Institutions. In its keen commitment to offer quality education, CVR, over the past 15 years has become a temple of knowledge and produced about 4800 eminent and skillfull graduate and Post graduates, who are successful in their careers, serving all over the state." />
+				</mx:HBox>
+			</s:BorderContainer>
+		</mx:HBox>
+			<components:homePageBottom textWidth="{homePageBorder.width-60}"/>
+		</mx:VBox>
+		<mx:VBox width="100%"  backgroundAlpha="0" paddingLeft="10" paddingTop="10" verticalScrollPolicy="off"
+				 horizontalScrollPolicy="off">
+			<mx:VBox width="100%"  id="allAboutHolder" verticalScrollPolicy="off"
+					 horizontalScrollPolicy="off">
+				<mx:HBox width="100%"  id="aboutComponentHolder" verticalScrollPolicy="off"
+						 horizontalScrollPolicy="off">
+					<mx:VBox  height="100%" id="leftSideBox">
+						<s:BorderContainer backgroundColor="0xCCFFCC" backgroundAlpha="0.6" borderColor="0xC8FE2E" borderStyle="solid" borderWeight="5" id="missionHolder"
+										   click="label1_clickHandler(event)" buttonMode="true"
+										   useHandCursor="true" mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}">
+							<mx:VBox width="200" height="30" backgroundColor="#084B8A" horizontalAlign="center" verticalAlign="middle"
+									 id="missionId" color="#FFFFFF"  buttonMode="true"
+									 useHandCursor="true" mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}">
+								<s:Label text="Mission"  />
+							</mx:VBox>
+						</s:BorderContainer>
+						
+						<s:BorderContainer backgroundColor="0x406d8d" backgroundAlpha="0.6" 
+										   click="label1_clickHandler(event)" buttonMode="true"
+										   useHandCursor="true" 
+										   mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}" borderColor="#084B8A" borderStyle="solid" borderWeight="5" id="profHolder">
+							<mx:VBox width="200" height="30" backgroundColor="#084B8A"
+									 horizontalAlign="center" verticalAlign="middle"  id="profJHolder" borderStyle="solid"
+									 borderColor="#084B8A" mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}">
+								<s:Label text="College Profile" color="#FFFFFF" id="profileId"/>
+							</mx:VBox>
+						</s:BorderContainer>
+						<s:BorderContainer backgroundColor="0x406d8d" backgroundAlpha="0.6"
+										   click="label1_clickHandler(event)" buttonMode="true"
+										   useHandCursor="true" 
+										   mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}" borderColor="#084B8A" borderStyle="solid" borderWeight="5" id="uniHolder">
+							<mx:VBox width="200" height="30" backgroundColor="#084B8A"
+									 horizontalAlign="center" verticalAlign="middle">
+								<s:Label text="Kakatiya University" color="#FFFFFF" id="uniId"/>
+							</mx:VBox>
+						</s:BorderContainer>
+						<s:BorderContainer backgroundColor="0x406d8d" backgroundAlpha="0.6"
+										   click="label1_clickHandler(event)" buttonMode="true"
+										   useHandCursor="true" 
+										   mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}" borderColor="#084B8A" borderStyle="solid" borderWeight="5" id="organiHolder">
+							<mx:VBox width="200" height="30" backgroundColor="#084B8A"
+									 horizontalAlign="center" verticalAlign="middle">
+								<s:Label text="About Organization" color="#FFFFFF" id="organizationId"/>
+							</mx:VBox>
+						</s:BorderContainer>
+					</mx:VBox>
+					
+					<mx:ViewStack height="180" width="100%" id="viewsfordetails">
+						<mx:VBox backgroundColor="#084B8A" height="180" width="100%" id="showTextHolder">
+							<components:missionComp/>
+						</mx:VBox>
+						<mx:VBox backgroundColor="#084B8A" height="180" width="100%" id="detailtHolder"
+								 horizontalScrollPolicy="off" verticalScrollPolicy="off">
+							<components:detailPage />
+						</mx:VBox>
+						<mx:VBox backgroundColor="#FFFFFF" height="180" width="100%" id="showHtmlTextHolder">
+							<mx:Text text="Click the below link to navigate to the site"/>
+							<mx:Text text="http://www.kuwarangal.com/default.aspx" color="blue" click="{navigateToURL(new URLRequest(showHtmlText.text))}"
+									 fontSize="20" textDecoration="underline"
+									 id="showHtmlText" useHandCursor="true" buttonMode="true" mouseChildren="false"/>
+						</mx:VBox>
+						
+					</mx:ViewStack>
+					<s:Spacer width="10"/>
+				</mx:HBox> 
+				<mx:Label  fontWeight="bold" fontSize="24" text="{_departmentName}" fontStyle="italic" id="depnameID"/>
+				<mx:VBox id="similarChbox1" width="100%" height="{this.height-aboutComponentHolder.height-30}" backgroundAlpha="0"
+						 horizontalGap="0" verticalGap="0">
+				</mx:VBox>
+			</mx:VBox>
+			
+		</mx:VBox>
+		<mx:Canvas width="100%" height="100%" backgroundAlpha="0"  horizontalScrollPolicy="off" id="mainBox">
+			<mx:VBox width="100%" height="100%" backgroundAlpha="0" paddingLeft="10" paddingTop="30" horizontalScrollPolicy="off"
+					 id="mapHolder">
+				<maps:Map xmlns:maps="com.google.maps.*" id="mapView" mapevent_mapready="{onMapReady(event)}"
+						  width="100%" height="100%" sensor="false" key="your_api_key"/>
+			</mx:VBox>
+			<mx:VBox width="100%" height="100%" backgroundAlpha="0" paddingLeft="10" paddingTop="55" horizontalScrollPolicy="off"
+					 id="callusHolder" visible="false" >
+				<mx:HBox>
+					<s:Label text="Help Desk: " fontWeight="bold" fontSize="20"/>
+					<s:Label text="08726-2543798" fontWeight="bold" fontSize="20"/>
+				</mx:HBox>
+				<mx:HBox>
+					<s:Label text="Finance Contact: " fontWeight="bold" fontSize="20"/>
+					<s:Label text="08726-2543798" fontWeight="bold" fontSize="20"/>
+				</mx:HBox>
+				<mx:HBox>
+					<s:Label text="Bus Information: " fontWeight="bold" fontSize="20"/>
+					<s:Label text="08726-2543798" fontWeight="bold" fontSize="20"/>
+				</mx:HBox>
+				
+			</mx:VBox>
+			<mx:VBox width="100%" height="100%" backgroundAlpha="0" paddingLeft="10" paddingTop="55" horizontalScrollPolicy="off"
+					 id="emailHolder" visible="false">
+				<mx:HBox>
+					<s:Label text="Administration Email: " fontWeight="bold" fontSize="20"/>
+					<s:Label text="administration@cvraman.net" fontWeight="bold" fontSize="20"/>
+					<mx:HBox width="25" height="24" horizontalAlign="center" verticalAlign="middle" backgroundColor="#084B8A">
+						<mx:Image source="com/assets/email.jpeg" click="image1_clickHandler(event)" name="administration@cvraman.net"
+								  useHandCursor="true" buttonMode="true" mouseChildren="false"/>
+					</mx:HBox>
+					
+				</mx:HBox>
+				<mx:HBox>
+					<s:Label text="Finance Email            : " fontWeight="bold" fontSize="20"/>
+					<s:Label text="finanace@cvraman.net" fontWeight="bold" fontSize="20"/>
+					<mx:HBox width="25" height="24" horizontalAlign="center" verticalAlign="middle" backgroundColor="#084B8A">
+						<mx:Image source="com/assets/email.jpeg" click="image1_clickHandler(event)" name="finanace@cvraman.net"
+								  useHandCursor="true" buttonMode="true" mouseChildren="false" />
+					</mx:HBox>
+					
+				</mx:HBox>
+				<mx:HBox>
+					<s:Label text="Bus Email	                  : " fontWeight="bold" fontSize="20"/>
+					<s:Label text="businfo@cvraman.net" fontWeight="bold" fontSize="20"/>
+					<mx:HBox width="25" height="24" horizontalAlign="center" verticalAlign="middle" backgroundColor="#084B8A">
+						<mx:Image source="com/assets/email.jpeg" click="image1_clickHandler(event)" name="businfo@cvraman.net"
+								  useHandCursor="true" buttonMode="true" mouseChildren="false"/>
+					</mx:HBox>
+					
+				</mx:HBox>
+			</mx:VBox>
+			<mx:VBox width="100%" height="100%" backgroundAlpha="0" paddingLeft="10" paddingTop="55" horizontalScrollPolicy="off"
+					 id="SocialHolder" visible="false">
+				<mx:HBox>
+					<s:Label text="Join us on Facebook " fontWeight="bold" fontSize="20"/>
+					<mx:Image source="com/assets/facebookIcon.jpeg" height="20" width="20" maintainAspectRatio="false"/>
+				</mx:HBox>
+				<mx:HBox>
+					<s:Label text="Follow us on Twitter " fontWeight="bold" fontSize="20"/>
+					<mx:Image source="com/assets/twitter.jpeg" height="20" width="20" maintainAspectRatio="false"/>
+				</mx:HBox>
+			</mx:VBox>
+			<mx:HBox paddingTop="10" paddingLeft="10">
+				<mx:VBox width="100" height="30" backgroundColor="#084B8A" horizontalAlign="center" verticalAlign="middle"
+						 click="vbox1_clickHandler(event)">
+					<mx:HBox horizontalAlign="center" verticalAlign="middle" >
+						<s:Label text="Find us" color="#FFFFFF"/>
+						<mx:Image source="com/assets/map.jpeg" height="20" width="20"/>
+					</mx:HBox>
+				</mx:VBox>
+				<mx:VBox width="100" height="30" backgroundColor="#084B8A"
+						 horizontalAlign="center" verticalAlign="middle"
+						 click="callusHolder_clickHandler(event)" buttonMode="true" useHandCursor="true">
+					<mx:HBox horizontalAlign="center" verticalAlign="middle" >
+					<s:Label text="Call us" color="#FFFFFF"/>
+						<mx:Image source="com/assets/phone.jpeg"/>
+					</mx:HBox>
+				</mx:VBox>
+				<mx:VBox width="150" height="30" backgroundColor="#084B8A"
+						 horizontalAlign="center" verticalAlign="middle"
+						 buttonMode="true" useHandCursor="true" click="vbox2_clickHandler(event)">
+					<mx:HBox horizontalAlign="center" verticalAlign="middle" >
+						<s:Label text="E-mail us" color="#FFFFFF"/>
+						<mx:Image source="com/assets/email.jpeg"/>
+					</mx:HBox>
+				</mx:VBox>
+				<mx:VBox width="180" height="30" backgroundColor="#084B8A"
+						 horizontalAlign="center" verticalAlign="middle"
+						 buttonMode="true" useHandCursor="true" click="vbox3_clickHandler(event)">
+					<mx:HBox horizontalAlign="center" verticalAlign="middle" >
+						<s:Label text="Social Connections" color="#FFFFFF"/>
+						<mx:Image source="com/assets/facebookIcon.jpeg" height="20" width="20" maintainAspectRatio="false"/>
+						<mx:Image source="com/assets/twitter.jpeg" height="20" width="20" maintainAspectRatio="false"/>
+					</mx:HBox>
+				</mx:VBox>
+			</mx:HBox>
+		</mx:Canvas>
+		<mx:Canvas width="100%" height="100%" backgroundAlpha="0"  horizontalScrollPolicy="off" id="infraStructureBox">
+			<components:infraStrComp/>
+		</mx:Canvas>
+	</mx:ViewStack>
+</s:Group>

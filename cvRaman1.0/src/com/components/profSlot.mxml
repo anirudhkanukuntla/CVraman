@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="99%" height="150" creationComplete="group1_creationCompleteHandler(event)" xmlns:components="com.components.*">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			public var Name:String;
+			public var Designation:String;
+			public var Qualification:String;
+			public var Exp:String;
+			
+			public var Nameid:String="Name: ";
+			public var Designationid:String="Designation: ";
+			public var Qualificationid:String="Qualification: ";
+			public var Expid:String="Experience: ";
+			
+			public var showbool:Boolean = true
+			private var borderWeight:uint=5;
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<mx:Glow id="glowImage" duration="1000" alphaFrom="1.0" alphaTo="0.3" blurXFrom="0.0" blurXTo="50.0" blurYFrom="0.0"
+				 blurYTo="50.0" color="0xC8FE2E"/>
+		
+		<mx:Glow id="unglowImage" duration="1000" alphaFrom="0.3" alphaTo="1.0" blurXFrom="50.0" blurXTo="0.0"
+				 blurYFrom="50.0" blurYTo="0.0" color="0x40FF00"/>	
+		
+	</fx:Declarations>
+	<s:VGroup width="100%" height="100%" >
+		<mx:HBox paddingLeft="15" width="{holder.width-10}" height="2" >
+			<mx:HBox  width="100%" height="2" backgroundColor="#2E64FE" />
+		</mx:HBox>
+	<mx:HBox  paddingLeft="30" paddingTop="20" width="100%" height="100%" verticalAlign="middle" id="holder" >
+		<components:imagesmoothing source="com/Images/cvramanImage.png" width="105" maintainProjectionCenter="false"
+								   mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}"
+								   useHandCursor="true" buttonMode="true" mouseChildren="false"/>
+		<mx:HBox horizontalGap="0" verticalGap="0" width="100%" height="100%">
+		<mx:VBox paddingLeft="10">
+			<mx:Label  color="#084B8A" fontSize="18" fontWeight="bold" width="100%" text="{Nameid}"  id="nameid" />
+			<mx:Label color="#084B8A" fontSize="18" fontWeight="bold" width="100%" text="{Designationid}"  id="desgnation"/>
+			<mx:Label color="#084B8A" fontSize="18" fontWeight="bold" width="100%" text="{Qualificationid}"  id="qualifi"/>
+			<mx:Label color="#084B8A" fontSize="18" fontWeight="bold" width="100%" text="{Expid}"  id="exp" visible="{showbool}"/>
+		</mx:VBox>
+	<mx:VBox paddingLeft="10" width="100%" height="100%">
+		<mx:Label color="#084B8A" fontSize="18" fontWeight="bold" width="100%" text="{Name}"  />
+		<mx:Label color="#084B8A" fontSize="18" fontWeight="bold" width="100%" text="{Designation}"  />
+		<mx:Label color="#084B8A" fontSize="18" fontWeight="bold" width="100%" text="{Qualification}"  />
+		<mx:Label color="#084B8A" fontSize="18" fontWeight="bold" width="100%" text="{Exp}" visible="{showbool}" />
+	</mx:VBox>
+		</mx:HBox>
+		<s:Spacer width="100%"/>
+</mx:HBox>
+	</s:VGroup>
+</s:Group>

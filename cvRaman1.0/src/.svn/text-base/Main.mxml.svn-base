@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" xmlns:views="com.views.*" creationComplete="application1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.Controllers.XML_LOADER;
+			import com.Controllers.appControls;
+			import com.Controllers.sharpShape;
+			import com.models.mainEvent;
+			
+			import mx.collections.XMLListCollection;
+			import mx.controls.Alert;
+			import mx.controls.Menu;
+			import mx.events.FlexEvent;
+			import mx.utils.ObjectUtil;
+			private var _appControls:appControls = appControls.getInstance();
+			private function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+
+				
+				// TODO Auto-generated method stub
+				trace("INIT");
+				_appControls.buttDispatcher.addEventListener(mainEvent.MAIN_EVENT_DISP, eventTrac);
+				var dateNow:Date = new Date();
+				var str:String="";
+				str =  "?uniqueID="+dateNow.minutes+dateNow.seconds+dateNow.milliseconds;
+				_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath.imageUrl+str,"IMAGE_LOAD");
+			}
+			[Bindable]
+			public var triangleHeight:uint = 130;
+			private function eventTrac(e:mainEvent):void
+			{
+				switch (e.eventType)
+				{
+					
+				}
+			}
+			private var borderWeight:uint=5;
+			
+		]]>	
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+
+	<s:BorderContainer  borderWeight="{borderWeight}" y="{mainBox.y-borderWeight}" x="{mainBox.x-borderWeight}" id="borderBox"
+						width="{mainBox.width+borderWeight+borderWeight}" height="100%">
+		<s:borderStroke>
+				<s:LinearGradientStroke rotation="90" weight="5">
+					<s:entries>
+						<s:GradientEntry color="#2E64FE" />
+					</s:entries>
+				</s:LinearGradientStroke>
+		</s:borderStroke>
+	</s:BorderContainer>
+	<mx:VBox width="100%" height="{this.height}"  verticalGap="0"  horizontalGap="0" horizontalAlign="center" 
+			 >
+		<s:Spacer height="10"/>
+		<mx:VBox verticalGap="0" horizontalGap="0" verticalAlign="top" horizontalAlign="left" id="mainBox" height="{this.height-10}"
+				 width="90%"  horizontalScrollPolicy="off" verticalScrollPolicy="off" >
+			<views:topImage width="100%" height="100"/>
+			<mx:HBox width="100%"  height="100%" backgroundColor="#01DF01" horizontalAlign="center" verticalAlign="middle">
+				<views:middleImage height="90%" width="95%" id="middleimage"/>
+			</mx:HBox>
+			<views:bottomBelow height="100%" width="100%"/>
+		</mx:VBox>
+	</mx:VBox>
+	<fx:Style source="com/css/css.css"/>
+</s:Application>

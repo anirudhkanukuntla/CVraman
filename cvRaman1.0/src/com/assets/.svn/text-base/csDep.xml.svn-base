@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<department>
+<name>Department of Computer Science</name>
+<lectures>
+<name>N. Srinivas</name>
+<Designation>Lecturer</Designation>
+<Qualification>B.Tech</Qualification>
+<Exp>4 Years</Exp>
+</lectures>
+<lectures>
+<name>S. Praveen Kumar</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>3 Years</Exp>
+</lectures>
+<lectures>
+<name>K. Sridhar</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>2 Years</Exp>
+</lectures>
+<lectures>
+<name>S. Sathish</name>
+<Designation>Lecturer</Designation>
+<Qualification>M.Sc</Qualification>
+<Exp>2 Years</Exp>
+</lectures>
+</department>

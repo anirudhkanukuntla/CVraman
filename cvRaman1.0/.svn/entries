@@ -1,0 +1,76 @@
+8
+
+dir
+21
+http://subversion.assembla.com/svn/anirudh1st/trunk/cvRaman2.0
+http://subversion.assembla.com/svn/anirudh1st
+
+
+
+2012-06-21T00:36:12.129396Z
+21
+sonika2020
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+2b5d43f5-8c0b-40a5-a55a-a6e6c5850460
+
+.actionScriptProperties
+file
+
+
+
+
+2012-06-09T22:43:55.000000Z
+4067c2ddf8741f1107d94dc28126c07e
+2012-06-21T00:20:04.212909Z
+20
+anirudh2020
+
+.flexProperties
+file
+
+
+
+
+2012-06-09T22:43:55.000000Z
+88ed38c6209027bcc7631a7a5e47c3cc
+2012-06-21T00:20:04.212909Z
+20
+anirudh2020
+
+.project
+file
+
+
+
+
+2012-06-09T22:43:52.000000Z
+4fd338244d8eec483d544b08ba31ec91
+2012-06-21T00:20:04.212909Z
+20
+anirudh2020
+
+.settings
+dir
+
+html-template
+dir
+
+libs
+dir
+
+src
+dir
+

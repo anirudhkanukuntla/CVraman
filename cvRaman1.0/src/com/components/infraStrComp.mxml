@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" creationComplete="group1_creationCompleteHandler(event)"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" xmlns:components="com.components.*">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.Controllers.appControls;
+			import com.models.mainEvent;
+			
+			import mx.events.FlexEvent;
+			protected function missionId_clickHandler(event:MouseEvent):void
+			{
+				if(event.currentTarget.id=="missionId"){
+					viewsforlabAndLibrs.selectedIndex=0;
+				}else{
+					viewsforlabAndLibrs.selectedIndex=1;
+				}
+				
+			}
+			private var _appControls:appControls = appControls.getInstance();
+
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				_appControls.buttDispatcher.addEventListener(mainEvent.MAIN_EVENT_DISP, eventTrac);
+
+			}
+			private function eventTrac(e:mainEvent):void
+			{
+				switch (e.eventType)
+				{
+					case "SHOW_LIB":
+						viewsforlabAndLibrs.selectedIndex=1;
+						break;
+					case "SHOW_LABS":
+						viewsforlabAndLibrs.selectedIndex=0;
+						break;
+					
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<mx:Glow id="glowImage" duration="1000" alphaFrom="1.0" alphaTo="0.3" blurXFrom="0.0" blurXTo="50.0" blurYFrom="0.0"
+				 blurYTo="50.0" color="0xC8FE2E"/>
+		
+		<mx:Glow id="unglowImage" duration="1000" alphaFrom="0.3" alphaTo="1.0" blurXFrom="50.0" blurXTo="0.0"
+				 blurYFrom="50.0" blurYTo="0.0" color="0x40FF00"/>
+	</fx:Declarations>
+	<mx:HBox width="100%" height="100%" paddingLeft="10" paddingTop="10">
+		<mx:VBox width="200" height="100%">
+			<mx:ViewStack id="viewsforlabAndLibrs" selectedIndex="0">
+				<mx:VBox width="100%" height="100%">
+					<s:BorderContainer backgroundColor="0x406d8d" backgroundAlpha="0.6" 
+									   buttonMode="true"
+									   useHandCursor="true" 
+									   mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}" borderColor="#084B8A" borderStyle="solid" borderWeight="5" id="BotanyHolder">
+						<mx:VBox width="100" height="30" backgroundColor="#084B8A"
+								 horizontalAlign="center" verticalAlign="middle"  id="Botany" borderStyle="solid"
+								 borderColor="#084B8A" >
+							<s:Label text="Botany" color="#FFFFFF" id="BotanyeId"/>
+						</mx:VBox>
+					</s:BorderContainer>
+					<s:BorderContainer backgroundColor="0x406d8d" backgroundAlpha="0.6" 
+									   buttonMode="true"
+									   useHandCursor="true" 
+									   mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}" borderColor="#084B8A" borderStyle="solid" borderWeight="5" id="ElectronicsHolder">
+						<mx:VBox width="100" height="30" backgroundColor="#084B8A"
+								 horizontalAlign="center" verticalAlign="middle"  id="Electronics" borderStyle="solid"
+								 borderColor="#084B8A" >
+							<s:Label text="Electronics" color="#FFFFFF" id="ElectronicsId"/>
+						</mx:VBox>
+					</s:BorderContainer>
+					<s:BorderContainer backgroundColor="0x406d8d" backgroundAlpha="0.6" 
+									   buttonMode="true"
+									   useHandCursor="true" 
+									   mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}" borderColor="#084B8A" borderStyle="solid" borderWeight="5" id="ZoologyHolder">
+						<mx:VBox width="100" height="30" backgroundColor="#084B8A"
+								 horizontalAlign="center" verticalAlign="middle"  id="Zoology" borderStyle="solid"
+								 borderColor="#084B8A" >
+							<s:Label text="Zoology" color="#FFFFFF" id="ZoologyId"/>
+						</mx:VBox>
+					</s:BorderContainer>
+					<s:BorderContainer backgroundColor="0x406d8d" backgroundAlpha="0.6" 
+									   buttonMode="true"
+									   useHandCursor="true" 
+									   mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}" borderColor="#084B8A" borderStyle="solid" borderWeight="5" id="ComputerHolder">
+						<mx:VBox width="100" height="30" backgroundColor="#084B8A"
+								 horizontalAlign="center" verticalAlign="middle"  id="Computer" borderStyle="solid"
+								 borderColor="#084B8A" >
+							<s:Label text="Computer" color="#FFFFFF" id="ComputerId"/>
+						</mx:VBox>
+					</s:BorderContainer>
+					<s:BorderContainer backgroundColor="0x406d8d" backgroundAlpha="0.6" 
+									   buttonMode="true"
+									   useHandCursor="true" 
+									   mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}" borderColor="#084B8A" borderStyle="solid" borderWeight="5" id="ChemistryHolder">
+						<mx:VBox width="100" height="30" backgroundColor="#084B8A"
+								 horizontalAlign="center" verticalAlign="middle"  id="Chemistry" borderStyle="solid"
+								 borderColor="#084B8A" >
+							<s:Label text="Chemistry" color="#FFFFFF" id="ChemistryId"/>
+						</mx:VBox>
+					</s:BorderContainer>
+					<s:BorderContainer backgroundColor="0x406d8d" backgroundAlpha="0.6" 
+									   buttonMode="true"
+									   useHandCursor="true" 
+									   mouseDownEffect="{glowImage}" mouseUpEffect="{unglowImage}" borderColor="#084B8A" borderStyle="solid" borderWeight="5" id="PhysicsHolder">
+						<mx:VBox width="100" height="30" backgroundColor="#084B8A"
+								 horizontalAlign="center" verticalAlign="middle"  id="Physics" borderStyle="solid"
+								 borderColor="#084B8A" >
+							<s:Label text="Physics" color="#FFFFFF" id="PhysicsId"/>
+						</mx:VBox>
+					</s:BorderContainer>
+				</mx:VBox>
+				<mx:VBox width="100%" height="100%">
+				</mx:VBox>
+			</mx:ViewStack>
+		</mx:VBox>
+		<components:imageComponet width="100%" height="100%"/>
+	</mx:HBox>
+	
+</s:Group>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<image>
+<mathematics>
+<imageurl>com/Images/mathematics.jpg</imageurl>
+</mathematics>
+<botany>
+<imageurl>com/Images/botany.png</imageurl>
+</botany>
+<zoology>
+<imageurl>com/Images/zoology.png</imageurl>
+</zoology>
+<physics>
+<imageurl>com/Images/physics.jpeg</imageurl>
+</physics>
+<chemistry>
+<imageurl>com/Images/chemistry.jpeg</imageurl>
+</chemistry>
+<computer>
+<imageurl>com/Images/computer.jpg</imageurl>
+</computer>
+<commerce>
+<imageurl>com/Images/commerce.jpeg</imageurl>
+</commerce>
+<english>
+<imageurl>com/Images/english.jpeg</imageurl>
+</english>
+</image>

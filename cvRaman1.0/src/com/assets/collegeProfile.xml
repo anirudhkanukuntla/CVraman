@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<department>
+<name>College Profile</name>
+<lectures>
+<name>G.RadhaKishan Rao</name>
+<Designation>Chairman</Designation>
+<Qualification>B.Com</Qualification>
+<Exp>8 Years</Exp>
+</lectures>
+<lectures>
+<name>K.V.Pratap</name>
+<Designation>Vice Chairman</Designation>
+<Qualification>B.Com, LLM</Qualification>
+<Exp>7 Years</Exp>
+</lectures>
+<lectures>
+<name>K.Madhusudan Rao</name>
+<Designation>Secretary</Designation>
+<Qualification>M.A, B.E.D</Qualification>
+</lectures>
+<lectures>
+<name>Dr.Venkateswarlu</name>
+<Designation>Joint Secretary</Designation>
+<Qualification>Opthamologist</Qualification>
+<Exp>5 Years</Exp>
+</lectures>
+<lectures>
+<name>G.Pavani</name>
+<Designation>Treasurer</Designation>
+<Qualification></Qualification>
+<Exp>3 Years</Exp>
+</lectures>
+<lectures>
+<name>K.Rama Devi</name>
+<Designation>Executive Member</Designation>
+<Qualification>M.A, M.E.D</Qualification>
+<Exp>3 Years</Exp>
+</lectures>
+<lectures>
+<name>Ramesh</name>
+<Designation>Executive Member</Designation>
+<Qualification>B.Com</Qualification>
+<Exp>2 Years</Exp>
+</lectures>
+<lectures>
+<name>Mangilal Somani</name>
+<Designation>Executive Member</Designation>
+<Qualification></Qualification>
+<Exp>1 Years</Exp>
+</lectures>
+</department>

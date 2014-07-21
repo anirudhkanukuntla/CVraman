@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="1500" xmlns:views="com.views.*" creationComplete="application1_creationCompleteHandler(event)" xmlns:components="com.components.*">
+	<fx:Script>
+		<![CDATA[
+			import com.Controllers.XML_LOADER;
+			import com.Controllers.appControls;
+			import com.Controllers.sharpShape;
+			import com.models.mainEvent;
+			import com.utils.Throbber;
+			import com.utils.ThrobberWrapper;
+			
+			import mx.collections.XMLListCollection;
+			import mx.controls.Alert;
+			import mx.controls.Menu;
+			import mx.core.FlexGlobals;
+			import mx.core.IFlexDisplayObject;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			import mx.utils.ObjectUtil;
+			
+			private var _appControls:appControls = appControls.getInstance();
+			
+			[Bindable]
+			private var defaultBackgroundImage:Class;
+			private function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+//				var win : Throbber = new Throbber();
+//				ThrobberWrapper.getInstance().startProcess(this,false);
+				getConfiguration();
+				trace("INIT");
+				_appControls.buttDispatcher.addEventListener(mainEvent.MAIN_EVENT_DISP, eventTrac);
+				var dateNow:Date = new Date();
+				var str:String="";
+				str =  "?uniqueID="+dateNow.minutes+dateNow.seconds+dateNow.milliseconds;
+				_appControls._xmlLoader.XML_LOAD(_appControls.navigationPath.imageUrl+str,"IMAGE_LOAD");
+			}
+			private function getConfiguration():void
+			{
+//				var flashVarObj:Object = parameters as Object;
+//				this.height=flashVarObj.height;
+//				Alert.show(""+ObjectUtil.toString(flashVarObj));
+			}
+			[Bindable]
+			public var triangleHeight:uint = 130;
+			private function eventTrac(e:mainEvent):void
+			{
+				switch (e.eventType)
+				{
+					case "ABOUT_VIEW":
+//						spacesHeight.height=400;
+						homeButton.height=middleImageBar.height;
+						homeButton.width=middleImageBar.width;
+						homeButton.visible = true;
+						break;
+					case "HOME_VIEW":
+						spacesHeight.height=0;
+						homeButton.percentHeight=0;
+						homeButton.percentWidth=0;
+						homeButton.visible = false;
+						break;
+					case "VIEW_CHANGE":
+						spacesHeight.height=0;
+						homeButton.percentHeight=0;
+						homeButton.percentWidth=0;
+						homeButton.visible = false;
+						break;
+				}
+			}
+			private var borderWeight:uint=5;
+			
+			
+		]]>	
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:BorderContainer  borderWeight="{borderWeight}" y="{mainBox.y-borderWeight}" x="{mainBox.x-borderWeight}" id="borderBox" 
+						width="{mainBox.width+borderWeight+borderWeight}" height="100%" backgroundAlpha="0">
+		<s:borderStroke>
+				<s:LinearGradientStroke rotation="90" weight="5">
+					<s:entries>
+						<s:GradientEntry color="#084B8A" />
+					</s:entries>
+				</s:LinearGradientStroke>
+		</s:borderStroke>
+	</s:BorderContainer>
+	<mx:VBox width="100%" height="{this.height}"  verticalGap="0"  horizontalGap="0" horizontalAlign="center" backgroundAlpha="0"
+			 >
+		<s:Spacer height="10"/>
+		<mx:VBox verticalGap="0" horizontalGap="0" verticalAlign="top" horizontalAlign="left" backgroundAlpha="0" id="mainBox" height="{this.height-10}"
+				 width="90%"  horizontalScrollPolicy="off" >
+			<views:topImage width="100%" height="100"/>
+			<mx:HBox width="100%"  height="400" backgroundColor="#01DF01" horizontalAlign="center" 
+					 id="middleImageBar" verticalAlign="middle">
+				<views:middleImage height="90%" width="95%" id="middleimage"/>
+			</mx:HBox>
+			<s:Spacer height="0" id="spacesHeight"/>
+			<views:bottomBelow height="100%" width="100%"/>
+		</mx:VBox>
+	</mx:VBox>
+	<mx:Canvas width="{middleImageBar.width}" height="500" x="{mainBox.x-borderWeight+5}" y="{middleImageBar.y+10}"
+			   >
+		<mx:VBox width="0" height="0" id="homeButton" visible="false" backgroundColor="0xD0FA58" horizontalAlign="center"
+				 verticalAlign="middle">
+			<components:imagesmoothing source="com/Images/collegePic.png" width="98%" height="95%" maintainAspectRatio="false"/>
+		</mx:VBox>
+	</mx:Canvas>
+	<fx:Style source="com/css/css.css"/>
+</s:Application>

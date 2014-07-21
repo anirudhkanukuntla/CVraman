@@ -1,0 +1,30 @@
+<Navigation>
+	<MainNavigation> 
+		<Mainlabel>About CVRAMAN</Mainlabel>
+		<innerLabel></innerLabel>
+	</MainNavigation>
+	<MainNavigation> 
+		<Mainlabel>Academics</Mainlabel>
+		<innerLabel></innerLabel>
+	</MainNavigation>		
+	<MainNavigation> 
+		<Mainlabel>Departments</Mainlabel>
+		<innerLabel>Mathematics</innerLabel>
+		<innerLabel>Botany</innerLabel>
+		<innerLabel>Zoology</innerLabel>
+		<innerLabel>Physics</innerLabel>
+		<innerLabel>Chemistry</innerLabel>
+		<innerLabel>Computer Science</innerLabel>
+		<innerLabel>Commerce</innerLabel>
+		<innerLabel>English</innerLabel>
+	</MainNavigation>	
+	<MainNavigation> 
+		<Mainlabel>Infrastructure</Mainlabel>
+		<innerLabel>Under Graduate Courses</innerLabel>
+		<innerLabel>Post Graduate Courses</innerLabel>
+	</MainNavigation>			
+	<MainNavigation> 
+		<Mainlabel>Contact Us</Mainlabel>
+		<innerLabel></innerLabel>
+	</MainNavigation>		
+</Navigation>

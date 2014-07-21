@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" 
+		 initialize="getPicXml();">
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Menu;
+			import mx.events.FlexEvent;
+			import mx.events.MenuEvent;
+			[Bindable]
+			private var model:XML;
+			protected var myMenu:Menu;
+			
+			private function getPicXml():void {
+				xmlListColl.source =Book.children();	
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<fx:XML id="Book" source="com/assets/main_page_navigation.xml" />
+		
+	</fx:Declarations>
+	
+	<mx:Canvas width="100%" height="100%">
+		<mx:HBox width="100%" height="100%" alpha="0.8">
+		</mx:HBox>
+		<mx:HBox height="100%" width="100%">
+			
+			<mx:VBox verticalAlign="bottom" height="100%" >
+				
+				<s:List width="200" height="100" labelField="@label">
+					<s:dataProvider>
+						<s:XMLListCollection id="xmlListColl"/>
+					</s:dataProvider>
+					
+				</s:List>
+				
+			</mx:VBox>
+		</mx:HBox>
+	</mx:Canvas>
+	
+	
+</s:Group>
